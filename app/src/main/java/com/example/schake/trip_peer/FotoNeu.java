@@ -1,6 +1,7 @@
 package com.example.schake.trip_peer;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Environment;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.example.schake.trip_peer.Camera.CameraPreview;
 
@@ -21,8 +23,8 @@ import java.util.Date;
 
 public class FotoNeu extends AppCompatActivity {
 
-    private Camera mCamera;
-    private CameraPreview mPreview;
+    public static final int CAMERA_REQUEST = 10;
+    private ImageView kamera;
 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     private Uri fileUri;
@@ -31,6 +33,7 @@ public class FotoNeu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foto_neu);
+        kamera = (ImageView) findViewById(R.id.kamera);
 
 
         // Create an instance of Camera
@@ -52,7 +55,21 @@ public class FotoNeu extends AppCompatActivity {
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
 
         // start the image capture Intent
-        startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+        startActivityForResult(intent, CAMERA_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    // Nutzer entscheidet ob das Foto ausgewählt wird oder ein neues gemacht werden soll.
+        if (resultCode == RESULT_OK) {
+            if (requestCode == CAMERA_REQUEST) {
+            Bitmap cameraImage = (Bitmap) data.getExtras().get("data");
+            kamera.setImageBitmap(cameraImage);
+            }
+        }
+
+
     }
 
     public static final int MEDIA_TYPE_IMAGE = 1;

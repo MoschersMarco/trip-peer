@@ -28,7 +28,8 @@
         android:ems="10"
         android:id="@+id/editText"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:hint="Name des Urlaubes" />
 
     // Button, um den neuen Urlaub zu starten.
     <Button
