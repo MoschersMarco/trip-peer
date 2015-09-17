@@ -1,7 +1,59 @@
 package com.example.schake.trip_peer.Data;
 
-/**
- * Created by mmoscher on 17.09.2015.
- */
-public class TripListViewAdapter {
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+import com.example.schake.trip_peer.R;
+
+import java.util.ArrayList;
+import java.util.Map;
+
+public class TripListViewAdapter extends BaseAdapter {
+    private final ArrayList mData;
+
+    public TripListViewAdapter(Map<Long, Trip> map) {
+        mData = new ArrayList();
+        mData.addAll(map.entrySet());
+    }
+
+    @Override
+    public int getCount() {
+        return mData.size();
+    }
+
+    @Override
+    public Map.Entry<Long, Trip> getItem(int position) {
+        return (Map.Entry) mData.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        // TODO implement you own logic with ID
+        return 0;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        final View result;
+
+        if (convertView == null) {
+            result = LayoutInflater.from(parent.getContext()).inflate(R.layout.trip_list_view_item, parent, false);
+        } else {
+            result = convertView;
+        }
+
+        Map.Entry<Long, Trip> item = getItem(position);
+
+        Trip trip = item.getValue();
+        // TODO replace findViewById by ViewHolder
+        ((TextView) result.findViewById(R.id.urlaubHeadline)).setText(trip.getName());
+        ((TextView) result.findViewById(R.id.urlaubDate)).setText(trip.getCreatedAt().toString());
+
+
+
+        return result;
+    }
 }

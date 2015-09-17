@@ -34,17 +34,6 @@ public class FotoNeu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foto_neu);
         kamera = (ImageView) findViewById(R.id.kamera);
-
-
-        // Create an instance of Camera
-        mCamera = getCameraInstance();
-
-        // Create our Preview view and set it as the content of our activity.
-        mPreview = new CameraPreview(this, mCamera);
-        FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-        preview.addView(mPreview);
-
-
     }
 
     public void takeNewPicture( View view ) {

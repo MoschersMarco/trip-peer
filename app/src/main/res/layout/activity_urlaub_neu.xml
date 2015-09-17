@@ -24,9 +24,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name des Urlaubes"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/inputUrlaubName"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:hint="Name des Urlaubes" />
@@ -38,10 +37,10 @@
         android:text="Urlaub starten"
         android:id="@+id/button2"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignRight="@+id/editText"
+        android:layout_alignLeft="@+id/inputUrlaubName"
+        android:layout_alignRight="@+id/inputUrlaubName"
         android:layout_marginBottom="20dp"
-        />
+        android:onClick="createTrip" />
 
 
 </RelativeLayout>

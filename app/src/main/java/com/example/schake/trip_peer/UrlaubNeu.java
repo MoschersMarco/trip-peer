@@ -1,9 +1,15 @@
 package com.example.schake.trip_peer;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+
+import com.example.schake.trip_peer.Data.Trip;
+import com.example.schake.trip_peer.Data.TripManager;
 
 public class UrlaubNeu extends AppCompatActivity {
 
@@ -18,6 +24,19 @@ public class UrlaubNeu extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_urlaub_neu, menu);
         return true;
+    }
+
+    public void createTrip(View view) {
+        TripManager manager = TripManager.getInstance();
+
+        EditText urlaubsName = (EditText) findViewById(R.id.inputUrlaubName);
+
+        Long newTripId = manager.newTrip( urlaubsName.getText().toString() );
+
+        manager.setActiveTrip( newTripId );
+
+        Intent newPictureIntent = new Intent(this, FotoNeu.class );
+        startActivity( newPictureIntent );
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.example.schake.trip_peer.Data;
 
-import android.content.Context;
+import com.example.schake.trip_peer.TripPeerApplication;
 
 import java.io.*;
 import java.util.HashMap;
@@ -16,9 +16,8 @@ public class TripManager {
     private final String exportFileName = "data-storage.trippeer";
 
     private static TripManager instance= null;
-    private Context androidContext = null;
 
-    private Trip currentTrip = null;
+    private Long currentTripId = null;
 
     private static AtomicReference<Long> currentTime =
             new AtomicReference<>(System.currentTimeMillis());
@@ -33,33 +32,33 @@ public class TripManager {
     protected TripManager() {
     }
 
-    public void setContext( Context con ) {
-        this.androidContext = con;
-    }
 
     public static TripManager getInstance() {
         if( TripManager.instance == null ) {
             TripManager.instance = new TripManager();
+            TripManager.instance.loadFromStorage();
         }
         return TripManager.instance;
     }
 
-    public static TripManager getInstanceWithContext( Context context ) {
-        TripManager manager = TripManager.getInstance();
-        manager.setContext( context );
-
-        return manager;
-    }
-
-    public void newTrip( String tripName ) {
+    public Long newTrip( String tripName ) {
         Trip trip = new Trip( tripName );
-        this.trips.put( TripManager.nextId(), trip );
+        Long tripId = TripManager.nextId();
+        this.trips.put(tripId , trip );
+
+        saveToStorage();
+
+        return tripId;
     }
 
     public void appendPhotoToActiveTrip( Photo photo) {
-        if( this.currentTrip != null ) {
-            this.currentTrip.addPhoto( photo );
+        if( this.currentTripId != null ) {
+            this.getTripById( this.currentTripId ).addPhoto( photo );
         }
+    }
+
+    public Map<Long,Trip> getTrips() {
+        return new HashMap<Long,Trip>( this.trips );
     }
 
     public Trip getTripById ( Long id ) {
@@ -72,12 +71,12 @@ public class TripManager {
 
     public void setActiveTrip( Long id ) {
         if( this.trips.containsKey( id ) ){
-            this.currentTrip = this.trips.get( id );
+            this.currentTripId = id;
         }
     }
 
-    public Trip getCurrentTrip() {
-        return this.currentTrip;
+    public Long getCurrentTripId() {
+        return this.currentTripId;
     }
 
 
@@ -85,7 +84,8 @@ public class TripManager {
 
         try {
 
-            File file = new File(androidContext.getFilesDir(), this.exportFileName);
+
+            File file = new File( TripPeerApplication.getAppContext().getFilesDir() , this.exportFileName);
 
             // if file doesn't exists, then create it
             if (!file.exists()) {
@@ -118,7 +118,7 @@ public class TripManager {
 
         try {
 
-            File file = new File(androidContext.getFilesDir(), this.exportFileName);
+            File file = new File( TripPeerApplication.getAppContext().getFilesDir(), this.exportFileName);
 
             // if file doesnt exists, then create it
             if (!file.exists()) {
