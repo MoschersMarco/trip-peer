@@ -11,6 +11,30 @@ public class UrlaubAktuell extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_urlaub_aktuell);
+
+        // Gets the MapView from the XML layout and creates it
+        MapView mapView = (MapView) v.findViewById(R.id.mapview);
+
+        mapView.onCreate(savedInstanceState);
+        mapView.onResume(); //without this, map showed but was empty
+
+        // Gets to GoogleMap from the MapView and does initialization stuff
+        map = mapView.getMap();
+        map.getUiSettings().setMyLocationButtonEnabled(false);
+        map.setMyLocationEnabled(true);
+
+
+        // Needs to call MapsInitializer before doing any CameraUpdateFactory calls
+        try {
+            MapsInitializer.initialize(this.getActivity());
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
+
+
+        // Updates the location and zoom of the MapView
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(44.14, 14.2), 10);
+        map.animateCamera(cameraUpdate);
     }
 
     @Override
