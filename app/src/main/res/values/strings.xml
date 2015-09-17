@@ -3,4 +3,10 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_urlaub_aktuell">UrlaubAktuell</string>
+    <string name="title_activity_urlaub_neu">UrlaubNeu</string>
+    <string name="title_activity_foto_neu">FotoNeu</string>
+    <string name="title_activity_urlaub_archiviert">UrlaubArchiviert</string>
+    <string name="title_activity_urlaub_foto">UrlaubFoto</string>
+    <string name="title_activity_urlaub_uebersicht">UrlaubUebersicht</string>
 </resources>
