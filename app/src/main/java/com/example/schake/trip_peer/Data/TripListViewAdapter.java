@@ -50,7 +50,7 @@ public class TripListViewAdapter extends BaseAdapter {
         Trip trip = item.getValue();
         // TODO replace findViewById by ViewHolder
         ((TextView) result.findViewById(R.id.urlaubHeadline)).setText(trip.getName());
-        ((TextView) result.findViewById(R.id.urlaubDate)).setText(trip.getCreatedAt().toString());
+       // ((TextView) result.findViewById(R.id.urlaubDate)).setText(trip.getCreatedAt().toString());
 
 
 

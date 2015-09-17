@@ -12,7 +12,7 @@ public class Photo implements Comparable<Photo>, Serializable {
     private long gpsLat;
     private long gpsLong;
 
-    private String name;
+    private String comment;
     private String fileName;
     private String filePath;
 
@@ -53,12 +53,12 @@ public class Photo implements Comparable<Photo>, Serializable {
         this.gpsLong = gpsLong;
     }
 
-    public String getName() {
-        return name;
+    public String getComment() {
+        return comment;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public String getFileName() {
