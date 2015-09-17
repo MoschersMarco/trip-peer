@@ -7,6 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.schake.trip_peer.R;
+import com.example.schake.trip_peer.utils.ArchivedTripListClickHandler;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -51,6 +52,8 @@ public class TripListViewAdapter extends BaseAdapter {
         // TODO replace findViewById by ViewHolder
         ((TextView) result.findViewById(R.id.urlaubHeadline)).setText(trip.getName());
        // ((TextView) result.findViewById(R.id.urlaubDate)).setText(trip.getCreatedAt().toString());
+
+        result.setOnClickListener( new ArchivedTripListClickHandler( trip.getTripId() ));
 
 
 

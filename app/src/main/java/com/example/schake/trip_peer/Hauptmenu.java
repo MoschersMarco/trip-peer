@@ -21,6 +21,7 @@ public class Hauptmenu extends AppCompatActivity {
 
     public void newPicture( View view ) {
         Intent newPictureIntent = new Intent(this, FotoNeu.class );
+        newPictureIntent.setFlags(newPictureIntent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(newPictureIntent);
     }
 

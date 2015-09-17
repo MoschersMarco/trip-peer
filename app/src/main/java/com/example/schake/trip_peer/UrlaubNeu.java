@@ -1,4 +1,4 @@
-package com.example.schake.trip_peer;
+    package com.example.schake.trip_peer;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -33,7 +33,6 @@ public class UrlaubNeu extends AppCompatActivity {
 
         Long newTripId = manager.newTrip( urlaubsName.getText().toString() );
 
-        manager.setActiveTrip( newTripId );
 
         Intent newPictureIntent = new Intent(this, FotoNeu.class );
         startActivity( newPictureIntent );

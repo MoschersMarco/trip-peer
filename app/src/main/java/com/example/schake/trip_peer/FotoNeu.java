@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -101,18 +102,39 @@ public class FotoNeu extends AppCompatActivity {
     }
 
     public void continueTrip( View view ){
+        saveImage();
 
+        showMainMenu();
     }
 
     public void archivTrip( View view ) {
+        saveImage();
 
+        TripManager manager = TripManager.getInstance();
+        manager.archivCurrentTrip();
+
+        showMainMenu();
     }
 
-    public void saveImage( String comment, Long gpsLat, Long gspLong) {
+    public void showMainMenu() {
+        Intent backToMainMenu = new Intent( this, Hauptmenu.class );
+        startActivity(backToMainMenu);
+    }
+
+    public void saveImage() {
+
+        EditText commentTextField = (EditText) findViewById(R.id.kommentar_zum_foto);
+        String comment = commentTextField.getText().toString();
+
+        File picture = new File(fileUri.getPath());
+
+
         TripManager manager = TripManager.getInstance();
 
         Photo newPicture = new Photo();
         newPicture.setComment( comment );
+        newPicture.setFilePath(picture.getAbsolutePath());
+        newPicture.setFileName( picture.getName() );
 
         manager.appendPhotoToActiveTrip( newPicture );
     }

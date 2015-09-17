@@ -17,7 +17,7 @@ public class TripManager {
 
     private static TripManager instance= null;
 
-    private Long currentTripId = null;
+    private Trip currentTrip = null;
 
     private static AtomicReference<Long> currentTime =
             new AtomicReference<>(System.currentTimeMillis());
@@ -27,11 +27,22 @@ public class TripManager {
      * Hashmap with a key, value stores
      * Stores all Trips with a unique interger
      */
-    private Map<Long, Trip> trips = new HashMap<Long, Trip>();
+    private Map<Long, Trip> archivedTrips = new HashMap<Long, Trip>();
 
     protected TripManager() {
     }
 
+
+    public void archivCurrentTrip() {
+        this.archivedTrips.put( currentTrip.getTripId(), currentTrip );
+        this.currentTrip = null;
+
+        saveToStorage();
+    }
+
+    public boolean hasActiveTrip() {
+        return ( this.currentTrip != null );
+    }
 
     public static TripManager getInstance() {
         if( TripManager.instance == null ) {
@@ -44,7 +55,9 @@ public class TripManager {
     public Long newTrip( String tripName ) {
         Trip trip = new Trip( tripName );
         Long tripId = TripManager.nextId();
-        this.trips.put(tripId , trip );
+        trip.setTripId( tripId );
+
+        this.currentTrip = trip;
 
         saveToStorage();
 
@@ -52,31 +65,21 @@ public class TripManager {
     }
 
     public void appendPhotoToActiveTrip( Photo photo) {
-        if( this.currentTripId != null ) {
-            this.getTripById( this.currentTripId ).addPhoto( photo );
+        if( this.currentTrip != null ) {
+            this.currentTrip.addPhoto( photo);
         }
     }
 
     public Map<Long,Trip> getTrips() {
-        return new HashMap<Long,Trip>( this.trips );
+        return new HashMap<Long,Trip>( this.archivedTrips );
     }
 
     public Trip getTripById ( Long id ) {
-        if( this.trips.containsKey(id) ){
-            return this.trips.get(id);
+        if( this.archivedTrips.containsKey(id) ){
+            return this.archivedTrips.get(id);
         }else{
             return null;
         }
-    }
-
-    public void setActiveTrip( Long id ) {
-        if( this.trips.containsKey( id ) ){
-            this.currentTripId = id;
-        }
-    }
-
-    public Long getCurrentTripId() {
-        return this.currentTripId;
     }
 
 
@@ -94,8 +97,11 @@ public class TripManager {
 
             FileInputStream fileIn = new FileInputStream(file.getAbsoluteFile());
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            this.trips.clear();
-            this.trips.putAll(  (HashMap<Long, Trip>) in.readObject() );
+            this.archivedTrips.clear();
+            TripExport loaded = (TripExport)in.readObject();
+            this.archivedTrips.putAll(  loaded.getArchivedTrips() );
+            this.currentTrip = loaded.getCurrentTrip();
+
             in.close();
             fileIn.close();
 
@@ -128,7 +134,9 @@ public class TripManager {
 
             FileOutputStream fout = new FileOutputStream( file.getAbsoluteFile() );
             ObjectOutputStream oos = new ObjectOutputStream(fout);
-            oos.writeObject(this.trips);
+
+            TripExport export = new TripExport( this.currentTrip, this.archivedTrips );
+            oos.writeObject(export);
             oos.close();
 
         }catch( IOException e ) {

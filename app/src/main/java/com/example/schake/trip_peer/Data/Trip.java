@@ -13,6 +13,9 @@ public class Trip implements Comparable<Trip>, Serializable {
     private String name;
     private Date createdAt;
 
+
+    private Long tripId;
+
     public Trip() {
         this.photos = new ArrayList<Photo>();
         this.createdAt = new Date();
@@ -59,5 +62,13 @@ public class Trip implements Comparable<Trip>, Serializable {
         return getCreatedAt().compareTo(o.getCreatedAt());
     }
 
+
+    public Long getTripId() {
+        return tripId;
+    }
+
+    public void setTripId(Long tripId) {
+        this.tripId = tripId;
+    }
 
 }
