@@ -5,6 +5,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.model.LatLng;
+
 public class UrlaubAktuell extends AppCompatActivity {
 
     @Override
@@ -13,23 +21,20 @@ public class UrlaubAktuell extends AppCompatActivity {
         setContentView(R.layout.activity_urlaub_aktuell);
 
         // Gets the MapView from the XML layout and creates it
-        MapView mapView = (MapView) v.findViewById(R.id.mapview);
+       MapView mapView = (MapView) findViewById(R.id.mapview);
 
         mapView.onCreate(savedInstanceState);
         mapView.onResume(); //without this, map showed but was empty
 
         // Gets to GoogleMap from the MapView and does initialization stuff
-        map = mapView.getMap();
+        GoogleMap map = mapView.getMap();
         map.getUiSettings().setMyLocationButtonEnabled(false);
         map.setMyLocationEnabled(true);
 
 
         // Needs to call MapsInitializer before doing any CameraUpdateFactory calls
-        try {
-            MapsInitializer.initialize(this.getActivity());
-        } catch (GooglePlayServicesNotAvailableException e) {
-            e.printStackTrace();
-        }
+        MapsInitializer.initialize(this);
+
 
 
         // Updates the location and zoom of the MapView
