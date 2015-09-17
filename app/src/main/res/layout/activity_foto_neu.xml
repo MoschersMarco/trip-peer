@@ -17,12 +17,8 @@
         android:layout_marginTop="20dp"
         android:textSize="24dp" />
 
-    <FrameLayout
-        android:id="@+id/camera_preview"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        />
+
+
 
     // Textbereich, um dem angefertigten Foto mit einem Kommentar zu versehen.
     <EditText
@@ -55,4 +51,15 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
         android:layout_alignParentRight="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Take Picture"
+        android:id="@+id/takePictureButton"
+        android:layout_above="@+id/kommentar_zum_foto"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_marginBottom="132dp"
+        android:onClick="takeNewPicture" />
 </RelativeLayout>
