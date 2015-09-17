@@ -6,7 +6,46 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.schake.trip_peer.FotoNeu">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="weiteres Foto"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="24dp" />
+
+    // Textbereich, um dem angefertigten Foto mit einem Kommentar zu versehen.
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Hier Kommentar eingetragen"
+        android:ems="10"
+        android:id="@+id/kommentar_zum_foto"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="91dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true" />
+
+    // Buttons unter dem Kommentarfeld:
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Urlaub fortsetzen"
+        android:id="@+id/urlaub_fortsetzen"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentLeft="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Urlaub archivieren"
+        android:id="@+id/urlaub_archivieren"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentRight="true" />
 </RelativeLayout>

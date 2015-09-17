@@ -28,7 +28,8 @@
         android:id="@+id/button"
         android:layout_above="@+id/zum_menue"
         android:layout_alignLeft="@+id/aktueller_urlaub_text"
-        android:layout_alignStart="@+id/aktueller_urlaub_text" />
+        android:layout_alignStart="@+id/aktueller_urlaub_text"
+        android:layout_alignRight="@+id/aktueller_urlaub_text" />
 
     <Button
         android:layout_width="wrap_content"
