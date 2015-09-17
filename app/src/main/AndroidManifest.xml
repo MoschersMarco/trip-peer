@@ -40,6 +40,12 @@
             android:name=".UrlaubUebersicht"
             android:label="@string/title_activity_urlaub_uebersicht" >
         </activity>
+
+        <uses-permission android:name="android.permission.CAMERA" />
+
+        <uses-feature android:name="android.hardware.camera" android:required="true" />
+        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     </application>
 
 </manifest>

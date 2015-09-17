@@ -17,6 +17,13 @@
         android:layout_marginTop="20dp"
         android:textSize="24dp" />
 
+    <FrameLayout
+        android:id="@+id/camera_preview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        />
+
     // Textbereich, um dem angefertigten Foto mit einem Kommentar zu versehen.
     <EditText
         android:layout_width="wrap_content"
