@@ -36,7 +36,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyD2-wJYoHSBCudxvRmXhwMxJCBJInQTmy4"/>
+            android:value="AIzaSyAh9oWP_lolfPZ4vpd5Xd1-GDyXpwmx3TE"/>
 
         <activity
             android:name=".Hauptmenu"
