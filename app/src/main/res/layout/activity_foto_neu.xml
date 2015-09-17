@@ -25,13 +25,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Hier Kommentar eingetragen"
         android:ems="10"
         android:id="@+id/kommentar_zum_foto"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="91dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:hint="Hier Kommentar eingetragen" />
 
     // Buttons unter dem Kommentarfeld:
     <Button
@@ -57,9 +57,20 @@
         android:layout_height="wrap_content"
         android:text="Take Picture"
         android:id="@+id/takePictureButton"
-        android:layout_above="@+id/kommentar_zum_foto"
+        android:onClick="takeNewPicture"
+        android:layout_below="@+id/textView2"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2"
+        android:layout_marginTop="117dp"
         android:layout_alignLeft="@+id/textView2"
-        android:layout_alignStart="@+id/textView2"
-        android:layout_marginBottom="132dp"
-        android:onClick="takeNewPicture" />
+        android:layout_alignStart="@+id/textView2" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/kamera"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
