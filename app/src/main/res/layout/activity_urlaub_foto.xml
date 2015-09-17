@@ -43,7 +43,8 @@
         android:text="vorherirges Foto"
         android:id="@+id/vorherirges_foto"
         android:layout_above="@+id/zur_urlaubsuebersicht"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:onClick="showPreviousPictureButtonClick" />
 
     <Button
         android:layout_width="wrap_content"
@@ -51,7 +52,15 @@
         android:text="nächstes Foto"
         android:id="@+id/naechstes_foto"
         android:layout_alignTop="@+id/vorherirges_foto"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:onClick="showNextPictureButtonClick" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pictures"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 public class Hauptmenu extends AppCompatActivity {
 
@@ -21,12 +20,12 @@ public class Hauptmenu extends AppCompatActivity {
 
     public void newPicture( View view ) {
         Intent newPictureIntent = new Intent(this, FotoNeu.class );
-        newPictureIntent.setFlags(newPictureIntent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+        //newPictureIntent.setFlags(newPictureIntent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(newPictureIntent);
     }
 
     public void currentTrip( View view ) {
-        Intent newPictureIntent = new Intent(this, maps.class );
+        Intent newPictureIntent = new Intent(this, MapFragment.class );
         startActivity( newPictureIntent );
     }
 
