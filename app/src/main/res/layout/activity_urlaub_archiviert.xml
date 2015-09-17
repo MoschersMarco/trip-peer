@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="archivierte Urlaube"
-        android:id="@+id/archivierteUrlaubeListView"
+        android:id="@+id/archivierteUrlaubeHeadline"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
@@ -35,10 +35,10 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listView"
+        android:id="@+id/archivierteUrlaubeListView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/archivierteUrlaubeHeadline"
         android:layout_above="@+id/zum_hauptmenue_archivierte_Urlaube" />
     />
 </RelativeLayout>

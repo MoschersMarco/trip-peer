@@ -19,6 +19,7 @@ public class Trip implements Comparable<Trip>, Serializable {
     }
 
     public Trip( String name ) {
+        this();
         setName( name );
     }
 

@@ -16,6 +16,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.example.schake.trip_peer.Camera.CameraPreview;
+import com.example.schake.trip_peer.Data.Photo;
+import com.example.schake.trip_peer.Data.TripManager;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -25,9 +27,11 @@ public class FotoNeu extends AppCompatActivity {
 
     public static final int CAMERA_REQUEST = 10;
     private ImageView kamera;
-
-    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     private Uri fileUri;
+
+
+    public static final int MEDIA_TYPE_IMAGE = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,22 +51,18 @@ public class FotoNeu extends AppCompatActivity {
         startActivityForResult(intent, CAMERA_REQUEST);
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     // Nutzer entscheidet ob das Foto ausgewählt wird oder ein neues gemacht werden soll.
         if (resultCode == RESULT_OK) {
             if (requestCode == CAMERA_REQUEST) {
-            Bitmap cameraImage = (Bitmap) data.getExtras().get("data");
-            kamera.setImageBitmap(cameraImage);
+                kamera.setImageURI( fileUri );
             }
         }
 
-
     }
-
-    public static final int MEDIA_TYPE_IMAGE = 1;
-    public static final int MEDIA_TYPE_VIDEO = 2;
 
     /** Create a file Uri for saving an image or video */
     private static Uri getOutputMediaFileUri(int type){
@@ -93,14 +93,28 @@ public class FotoNeu extends AppCompatActivity {
         if (type == MEDIA_TYPE_IMAGE){
             mediaFile = new File(mediaStorageDir.getPath() + File.separator +
                     "IMG_"+ timeStamp + ".jpg");
-        } else if(type == MEDIA_TYPE_VIDEO) {
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-                    "VID_"+ timeStamp + ".mp4");
         } else {
             return null;
         }
 
         return mediaFile;
+    }
+
+    public void continueTrip( View view ){
+
+    }
+
+    public void archivTrip( View view ) {
+
+    }
+
+    public void saveImage( String comment, Long gpsLat, Long gspLong) {
+        TripManager manager = TripManager.getInstance();
+
+        Photo newPicture = new Photo();
+        newPicture.setComment( comment );
+
+        manager.appendPhotoToActiveTrip( newPicture );
     }
 
     @Override
@@ -125,15 +139,4 @@ public class FotoNeu extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /** A safe way to get an instance of the Camera object. */
-    public static Camera getCameraInstance(){
-        Camera c = null;
-        try {
-            c = Camera.open(); // attempt to get a Camera instance
-        }
-        catch (Exception e){
-            Log.e("FotoNeu", "No Camera found!");
-        }
-        return c; // returns null if camera is unavailable
-    }
 }
