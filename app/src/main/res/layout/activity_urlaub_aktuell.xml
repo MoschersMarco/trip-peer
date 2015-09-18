@@ -35,12 +35,13 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Urlaub speichern"
-        android:id="@+id/urlaubSpeichern"
-        android:layout_above="@+id/zum_menue"
-        android:layout_alignLeft="@+id/aktueller_urlaub_text"
-        android:layout_alignStart="@+id/aktueller_urlaub_text"
-        android:layout_alignRight="@+id/aktueller_urlaub_text" />
+        android:text="Urlaub archivieren"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/zum_menue"
+        android:layout_alignEnd="@+id/zum_menue" />
 
     <Button
         android:layout_width="wrap_content"

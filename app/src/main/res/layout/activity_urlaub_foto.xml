@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:text="Kommentar des Fotos XY"
         android:id="@+id/kommentar_foto_xy"
-        android:layout_marginBottom="91dp"
+        android:layout_marginBottom="60dp"
         android:textSize="24dp"
         android:layout_above="@+id/zur_urlaubsuebersicht"
         android:layout_centerHorizontal="true" />
@@ -33,9 +33,12 @@
         android:text="zurück zur Urlaubsübersicht"
         android:id="@+id/zur_urlaubsuebersicht"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-        android:onClick="showUebersicht" />
+        android:onClick="showUebersicht"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 // Nächstes und vorheriges Foto anzeigen.
     <Button
         android:layout_width="wrap_content"
@@ -59,7 +62,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/pictures"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/urlaub_xy_urlaub_foto"
+        android:layout_above="@+id/kommentar_foto_xy"
+        android:layout_alignRight="@+id/naechstes_foto"
+        android:layout_alignEnd="@+id/naechstes_foto"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
