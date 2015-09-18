@@ -18,6 +18,10 @@ public class PictureLocationListener implements LocationListener {
         return lastLocation;
     }
 
+    public void setLastLocation(LatLng lastLocation) {
+        this.lastLocation = lastLocation;
+    }
+
     private LatLng lastLocation = null;
 
 
@@ -34,7 +38,7 @@ public class PictureLocationListener implements LocationListener {
     @Override
     public void onProviderDisabled(String provider){
         Toast.makeText( TripPeerApplication.getAppContext(),
-                "Gps Disabled",
+                "Trying to locate via GPS",
                 Toast.LENGTH_SHORT ).show();
 
     }

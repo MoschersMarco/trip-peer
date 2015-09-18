@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.schake.trip_peer.Data.Photo;
 import com.example.schake.trip_peer.Data.TripManager;
@@ -38,6 +39,13 @@ public class UrlaubUebersicht extends FragmentActivity
         TripManager manager = TripManager.getInstance();
         currentTripId = getIntent().getLongExtra("tripId", 0);
         List<Photo> pictures = manager.getTripById( currentTripId ).getPhotos();
+
+        TextView label = (TextView) findViewById( R.id.urlaub_xy_uebersicht );
+        if( manager.getTripById( currentTripId ).getName() != null ) {
+            label.setText(manager.getTripById( currentTripId ).getName());
+        }else{
+            label.setText("");
+        }
 
         // Instantiates a new Polyline object and adds points to define a rectangle
         PolylineOptions rectOptions = new PolylineOptions();

@@ -84,8 +84,12 @@ public class TripManager {
         if( this.archivedTrips.containsKey(id) ){
             return this.archivedTrips.get(id);
         }else{
-            return null;
+            if( currentTrip.getTripId().equals(id) ) {
+                return currentTrip;
+            }
         }
+
+        return null;
     }
 
     public Trip getCurrentTrip() {
@@ -97,8 +101,6 @@ public class TripManager {
         this.counter = 0;
 
         try {
-
-            Log.d("TRIPPEER", TripPeerApplication.getAppContext().getFilesDir().getAbsolutePath());
 
             File file = new File( TripPeerApplication.getAppContext().getFilesDir() , this.exportFileName);
 

@@ -37,14 +37,24 @@ public class UrlaubFoto extends AppCompatActivity {
         next = (Button)findViewById(R.id.naechstes_foto);
         prev = (Button)findViewById(R.id.vorherirges_foto);
 
+
         Intent callerIntent = getIntent();
         TripManager manager = TripManager.getInstance();
 
         tripId = callerIntent.getLongExtra("tripId", 0);
 
+
         Trip viewedTrip = manager.getTripById( tripId );
         tripPhotos.clear();
         this.currentIndex = callerIntent.getIntExtra("index", 0);
+
+
+        TextView label = (TextView) findViewById( R.id.urlaub_xy_urlaub_foto );
+        if( viewedTrip.getName() != null ) {
+            label.setText( viewedTrip.getName());
+        }else{
+            label.setText("");
+        }
 
         tripPhotos.addAll( viewedTrip.getPhotos() );
 
@@ -93,7 +103,7 @@ public class UrlaubFoto extends AppCompatActivity {
     public void showNextPictureButtonClick( View view ) {
         this.currentIndex++;
         checkButtons();
-        showPhoto( this.tripPhotos.get( this.currentIndex ) );
+        showPhoto(this.tripPhotos.get(this.currentIndex));
     }
 
     public void showPreviousPictureButtonClick( View view ) {

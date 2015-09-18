@@ -3,6 +3,7 @@ package com.example.schake.trip_peer;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.hardware.Camera;
+import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -58,13 +59,39 @@ public class FotoNeu extends AppCompatActivity {
         LocationManager mlocManager = (LocationManager)getSystemService(TripPeerApplication.getAppContext()
                 .LOCATION_SERVICE);
 
-        locListener= new PictureLocationListener();
-        mlocManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 4000, 0, locListener);
-        mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 4000, 0, locListener);
+        // getting GPS status
+        boolean isGPSEnabled = mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-        String provider = Settings.Secure.getString(getContentResolver(),
-                Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
-        if(provider.equals("")){
+        // getting network status
+        boolean isNetworkEnabled = mlocManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+
+        locListener= new PictureLocationListener();
+        mlocManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 0, 0, locListener);
+        mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locListener);
+
+        //try to get a last known location
+        if (mlocManager != null && (isGPSEnabled||isNetworkEnabled) ) {
+            Location location = null;
+
+            if( isGPSEnabled ) {
+                location = mlocManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                if (location != null) {
+                    locListener.setLastLocation(new LatLng(location.getLatitude(), location.getLongitude()));
+                }
+            }
+            if( isNetworkEnabled &&location == null) {
+                //try to get network attached address
+                location = mlocManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                if( location != null ){
+                    locListener.setLastLocation( new LatLng(location.getLatitude(), location.getLongitude()) );
+                }
+            }
+
+        }
+
+
+        if( !isGPSEnabled ){
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(intent);
         }

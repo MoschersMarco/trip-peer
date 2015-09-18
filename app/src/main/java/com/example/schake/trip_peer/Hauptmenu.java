@@ -1,15 +1,14 @@
 package com.example.schake.trip_peer;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.schake.trip_peer.Data.TripManager;
-import com.example.schake.trip_peer.utils.MarkCurrentTripAsArchivedDialog;
 
 public class Hauptmenu extends AppCompatActivity {
 
@@ -63,16 +62,36 @@ public class Hauptmenu extends AppCompatActivity {
     }
 
     public void newTrip( View v ) {
-        TripManager manager = TripManager.getInstance();
+        final TripManager manager = TripManager.getInstance();
+
         if( manager.hasActiveTrip() ) {
-            MarkCurrentTripAsArchivedDialog alertDialog = new MarkCurrentTripAsArchivedDialog();
 
-            alertDialog.show(  alertDialog.getFragmentManager(), "HINT");
+            String currentTripName = manager.getCurrentTrip().getName();
 
+            new AlertDialog.Builder( v.getContext() )
+                    .setTitle("Neuen Urlaub starten?")
+                    .setMessage("Wollen Sie den aktuellen Urlaub " + currentTripName + " wirklich beenden und einen neuen starten?")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    manager.archivCurrentTrip();;
+                                    Intent newPictureIntent = new Intent( Hauptmenu.this, UrlaubNeu.class);
+                                    startActivity(newPictureIntent);
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // do nothing
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_info)
+                            .show();
+
+        }else{
+            Intent newPictureIntent = new Intent( Hauptmenu.this, UrlaubNeu.class);
+            startActivity(newPictureIntent);
         }
 
-        Intent newPictureIntent = new Intent(this, UrlaubNeu.class);
-        startActivity( newPictureIntent );
+
     }
 
     public void latestTrips( View view ) {
