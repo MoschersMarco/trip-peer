@@ -34,6 +34,10 @@ public class UrlaubAktuell extends  FragmentActivity
 
         for( Photo pic : pictures ) {
 
+            //legacy
+            if( pic.getGpsPoint() == null ) {
+                continue;
+            }
 
             //add marker
             map.addMarker(new MarkerOptions()

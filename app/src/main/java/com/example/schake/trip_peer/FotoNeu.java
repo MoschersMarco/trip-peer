@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -35,6 +36,8 @@ public class FotoNeu extends AppCompatActivity {
     private ImageView kamera;
     private Uri fileUri;
 
+    private Button saveImageButton;
+    private Button saveImageAndArchivTripButton;
 
     public static final int MEDIA_TYPE_IMAGE = 1;
 
@@ -46,6 +49,11 @@ public class FotoNeu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foto_neu);
         kamera = (ImageView) findViewById(R.id.kamera);
+        saveImageButton = (Button) findViewById(R.id.urlaub_fortsetzen);
+        saveImageAndArchivTripButton = (Button) findViewById(R.id.urlaub_archivieren);
+
+        saveImageButton.setEnabled( false );
+        saveImageAndArchivTripButton.setEnabled( false );
 
         LocationManager mlocManager = (LocationManager)getSystemService(TripPeerApplication.getAppContext()
                 .LOCATION_SERVICE);
@@ -82,6 +90,8 @@ public class FotoNeu extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == CAMERA_REQUEST) {
                 kamera.setImageURI( fileUri );
+                saveImageButton.setEnabled( true );
+                saveImageAndArchivTripButton.setEnabled( true );
             }
         }
 

@@ -44,6 +44,11 @@ public class UrlaubUebersicht extends FragmentActivity
         Integer counter = 0;
         for( Photo pic : pictures ) {
 
+            //legacy
+            if( pic.getGpsPoint() == null ) {
+                continue;
+            }
+
             //add marker
             Marker markerAdded = map.addMarker(new MarkerOptions()
                     .position( pic.getGpsPoint())
@@ -70,8 +75,8 @@ public class UrlaubUebersicht extends FragmentActivity
 
         int counter = this.markerList.get( marker );
 
-        Intent showPictureIntent = new Intent( this, UrlaubFoto.class );
-        showPictureIntent.putExtra("index",  counter );
+        Intent showPictureIntent = new Intent( this, UrlaubFoto.class);
+        showPictureIntent.putExtra("index", counter);
         showPictureIntent.putExtra("tripId", currentTripId);
 
         startActivity(showPictureIntent );
@@ -88,7 +93,7 @@ public class UrlaubUebersicht extends FragmentActivity
         mapFragment.getMapAsync(this);
     }
 
-    public void showMenufromUebersicht( View view ) {
+    public void showMenufromUebersicht( View view) {
         Intent newMenuIntent = new Intent(this, Hauptmenu.class );
         startActivity(newMenuIntent);
     }

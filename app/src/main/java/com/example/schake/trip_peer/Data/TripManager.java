@@ -1,5 +1,7 @@
 package com.example.schake.trip_peer.Data;
 
+import android.util.Log;
+
 import com.example.schake.trip_peer.TripPeerApplication;
 
 import java.io.*;
@@ -96,6 +98,7 @@ public class TripManager {
 
         try {
 
+            Log.d("TRIPPEER", TripPeerApplication.getAppContext().getFilesDir().getAbsolutePath());
 
             File file = new File( TripPeerApplication.getAppContext().getFilesDir() , this.exportFileName);
 
