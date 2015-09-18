@@ -4,24 +4,29 @@
 
     <uses-sdk android:minSdkVersion="15" />
 
-    // Benötigten Berechtigungen für die App.
+    <!-- Benötigten Berechtigungen für die App:-->
+
     <uses-permission android:name="android.permission.CAMERA" />
+    <!-- Berechtigung für die Kamera-->
     <uses-feature android:name="android.hardware.camera" android:required="true" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--Berechtigung zur Speicherung der Daten-->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Berechtigung für das Internet-->
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!--Berechtigung zur Ortung des Smartphones-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="com.example.permission.MAPS_RECEIVE"/>
+    <!-- Berechtigung für Google Maps-->
+
 
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true"/>
 
 
-    <uses-permission android:name="com.example.permission.MAPS_RECEIVE"/>
-
-
-    <application
+        <application
         android:name=".TripPeerApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -39,9 +44,13 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyAh9oWP_lolfPZ4vpd5Xd1-GDyXpwmx3TE"/>
 
+
         <activity
             android:name=".Hauptmenu"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <!-- Verhindern, dass sich der Bildschirm in die Horizontale dreht. -->
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,27 +59,39 @@
         </activity>
         <activity
             android:name=".UrlaubAktuell"
-            android:label="@string/title_activity_urlaub_aktuell" >
+            android:label="@string/title_activity_urlaub_aktuell"
+            android:screenOrientation="portrait"
+            >
         </activity>
         <activity
             android:name=".UrlaubNeu"
-            android:label="@string/title_activity_urlaub_neu" >
+            android:label="@string/title_activity_urlaub_neu"
+            android:screenOrientation="portrait"
+            >
         </activity>
         <activity
             android:name=".FotoNeu"
-            android:label="@string/title_activity_foto_neu" >
+            android:label="@string/title_activity_foto_neu"
+            android:screenOrientation="portrait"
+            >
         </activity>
         <activity
             android:name=".UrlaubArchiviert"
-            android:label="@string/title_activity_urlaub_archiviert" >
+            android:label="@string/title_activity_urlaub_archiviert"
+            android:screenOrientation="portrait"
+            >
         </activity>
         <activity
             android:name=".UrlaubFoto"
-            android:label="@string/title_activity_urlaub_foto" >
+            android:label="@string/title_activity_urlaub_foto"
+            android:screenOrientation="portrait"
+            >
         </activity>
         <activity
             android:name=".UrlaubUebersicht"
-            android:label="@string/title_activity_urlaub_uebersicht" >
+            android:label="@string/title_activity_urlaub_uebersicht"
+            android:screenOrientation="portrait"
+            >
         </activity>
 
         <meta-data
