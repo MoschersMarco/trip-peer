@@ -1,5 +1,7 @@
 package com.example.schake.trip_peer.Data;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,14 +10,11 @@ import java.util.Date;
  */
 public class Photo implements Comparable<Photo>, Serializable {
 
-
-    private long gpsLat;
-    private long gpsLong;
-
     private String comment;
     private String fileName;
     private String filePath;
 
+    private LatLng gpsPoint;
 
     private Date createdAt;
 
@@ -23,34 +22,15 @@ public class Photo implements Comparable<Photo>, Serializable {
         this.createdAt = new Date();
     }
 
-    public Photo( long gpsLat, long gpsLong, String fileName ) {
+    public Photo( LatLng gpsPoint, String fileName ) {
         this();
-
-        setGpsLat(gpsLat);
-        setGpsLong( gpsLong );
+        setGpsPoint( gpsPoint );
         setFileName( fileName );
     }
 
     @Override
     public int compareTo(Photo o) {
         return getCreatedAt().compareTo(o.getCreatedAt());
-    }
-
-
-    public long getGpsLat() {
-        return gpsLat;
-    }
-
-    public void setGpsLat(long gpsLat) {
-        this.gpsLat = gpsLat;
-    }
-
-    public long getGpsLong() {
-        return gpsLong;
-    }
-
-    public void setGpsLong(long gpsLong) {
-        this.gpsLong = gpsLong;
     }
 
     public String getComment() {
@@ -86,4 +66,11 @@ public class Photo implements Comparable<Photo>, Serializable {
         this.createdAt = createdAt;
     }
 
+    public LatLng getGpsPoint() {
+        return gpsPoint;
+    }
+
+    public void setGpsPoint(LatLng gpsPoint) {
+        this.gpsPoint = gpsPoint;
+    }
 }

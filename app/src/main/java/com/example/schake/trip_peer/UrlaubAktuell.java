@@ -33,15 +33,15 @@ public class UrlaubAktuell extends  FragmentActivity
         PolylineOptions rectOptions = new PolylineOptions();
 
         for( Photo pic : pictures ) {
-            LatLng point = new LatLng(pic.getGpsLat(), pic.getGpsLong());
+
 
             //add marker
             map.addMarker(new MarkerOptions()
-                    .position( point )
+                    .position( pic.getGpsPoint() )
                     .title( pic.getComment() ));
 
             //add new point for line
-            rectOptions.add(point);
+            rectOptions.add( pic.getGpsPoint() );
         }
 
         // Get back the mutable Polyline
@@ -68,27 +68,5 @@ public class UrlaubAktuell extends  FragmentActivity
         manager.archivCurrentTrip();
         Intent showArchivedTrips = new Intent(this, UrlaubArchiviert.class );
         startActivity( showArchivedTrips );
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_urlaub_aktuell, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

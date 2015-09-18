@@ -69,22 +69,8 @@ public class TripManager {
     public void appendPhotoToActiveTrip( Photo photo) {
         if( this.currentTrip != null ) {
 
-            if( this.counter == 0) {
-                photo.setGpsLat((long) 13.404954);
-                photo.setGpsLong((long)52.520007);
-            }else if( this.counter == 1) {
-                photo.setGpsLat((long)53.551085);
-                photo.setGpsLong((long) 9.993682);
-            }else if( this.counter == 2) {
-                photo.setGpsLat((long)52.375892);
-                photo.setGpsLong((long)9.73201);
-            }else if( this.counter == 3) {
-                photo.setGpsLat((long)52.160597);
-                photo.setGpsLong((long)8.856095);
-            }
-
             this.currentTrip.addPhoto( photo);
-            counter++;
+            saveToStorage();
         }
     }
 

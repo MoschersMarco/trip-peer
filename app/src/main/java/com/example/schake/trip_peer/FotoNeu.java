@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.schake.trip_peer.Data.Photo;
 import com.example.schake.trip_peer.Data.TripManager;
 import com.example.schake.trip_peer.utils.PictureLocationListener;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -37,6 +38,8 @@ public class FotoNeu extends AppCompatActivity {
 
     public static final int MEDIA_TYPE_IMAGE = 1;
 
+    private PictureLocationListener locListener = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +50,9 @@ public class FotoNeu extends AppCompatActivity {
         LocationManager mlocManager = (LocationManager)getSystemService(TripPeerApplication.getAppContext()
                 .LOCATION_SERVICE);
 
-        LocationListener mlocListener = new PictureLocationListener();
-        mlocManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
+        locListener= new PictureLocationListener();
+        mlocManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 4000, 0, locListener);
+        mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 4000, 0, locListener);
 
         String provider = Settings.Secure.getString(getContentResolver(),
                 Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
@@ -120,18 +124,18 @@ public class FotoNeu extends AppCompatActivity {
     }
 
     public void continueTrip( View view ){
-        saveImage();
-
-        showMainMenu();
+        if( saveImage () ) {
+            showMainMenu();
+        }
     }
 
     public void archivTrip( View view ) {
-        saveImage();
+        if( saveImage() ) {
 
-        TripManager manager = TripManager.getInstance();
-        manager.archivCurrentTrip();
-
-        showMainMenu();
+            TripManager manager = TripManager.getInstance();
+            manager.archivCurrentTrip();
+            showMainMenu();
+        }
     }
 
     public void showMainMenu() {
@@ -139,44 +143,34 @@ public class FotoNeu extends AppCompatActivity {
         startActivity(backToMainMenu);
     }
 
-    public void saveImage() {
+    public boolean saveImage() {
 
         EditText commentTextField = (EditText) findViewById(R.id.kommentar_zum_foto);
         String comment = commentTextField.getText().toString();
 
         File picture = new File(fileUri.getPath());
+        LatLng position = this.locListener.getLastLocation();
+
+        if(position == null ) {
+            Toast.makeText( TripPeerApplication.getAppContext(),
+                    "GPS Location is unkown - please wait",
+                    Toast.LENGTH_LONG ).show();
+            return false;
+        }else {
 
 
-        TripManager manager = TripManager.getInstance();
+            TripManager manager = TripManager.getInstance();
 
-        Photo newPicture = new Photo();
-        newPicture.setComment( comment );
-        newPicture.setFilePath(picture.getAbsolutePath());
-        newPicture.setFileName( picture.getName() );
+            Photo newPicture = new Photo();
+            newPicture.setComment(comment);
+            newPicture.setFilePath(picture.getAbsolutePath());
+            newPicture.setFileName(picture.getName());
+            newPicture.setGpsPoint( position );
 
-        manager.appendPhotoToActiveTrip( newPicture );
-    }
+            manager.appendPhotoToActiveTrip(newPicture);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_foto_neu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
             return true;
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
 }
