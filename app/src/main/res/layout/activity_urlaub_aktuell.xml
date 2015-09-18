@@ -23,33 +23,36 @@
     <fragment
         android:name="com.google.android.gms.maps.MapFragment"
         android:id="@+id/map"
-        android:layout_above="@+id/button"
         android:layout_below="@+id/aktueller_urlaub_text"
         android:layout_width="200px"
         android:layout_height="200px"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/zum_menue" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Urlaub speichern"
+        android:text="Urlaub archivieren"
         android:id="@+id/button"
-        android:layout_above="@+id/zum_menue"
-        android:layout_alignLeft="@+id/aktueller_urlaub_text"
-        android:layout_alignStart="@+id/aktueller_urlaub_text"
-        android:layout_alignRight="@+id/aktueller_urlaub_text" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/zum_menue"
+        android:layout_alignEnd="@+id/zum_menue" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="zum Hauptmenü"
         android:id="@+id/zum_menue"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:onClick="showMenu" />
+        android:onClick="showMenu"
+        android:layout_above="@+id/button"
+        android:layout_alignRight="@+id/map"
+        android:layout_alignEnd="@+id/map"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

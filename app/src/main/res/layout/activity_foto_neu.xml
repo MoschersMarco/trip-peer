@@ -39,20 +39,24 @@
         android:layout_height="wrap_content"
         android:text="Urlaub fortsetzen"
         android:id="@+id/urlaub_fortsetzen"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
+        android:onClick="continueTrip"
+        android:layout_above="@+id/urlaub_archivieren"
+        android:layout_alignRight="@+id/kommentar_zum_foto"
+        android:layout_alignEnd="@+id/kommentar_zum_foto"
         android:layout_alignParentLeft="true"
-        android:onClick="continueTrip" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Urlaub archivieren"
         android:id="@+id/urlaub_archivieren"
+        android:onClick="archivTrip"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
-        android:layout_alignParentRight="true"
-        android:onClick="archivTrip" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/urlaub_fortsetzen"
+        android:layout_alignEnd="@+id/urlaub_fortsetzen" />
 
     <Button
         android:layout_width="wrap_content"
