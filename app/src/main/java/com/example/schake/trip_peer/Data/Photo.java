@@ -14,7 +14,8 @@ public class Photo implements Comparable<Photo>, Serializable {
     private String fileName;
     private String filePath;
 
-    private LatLng gpsPoint;
+    private double gpsLng;
+    private double gpsLat;
 
     private Date createdAt;
 
@@ -67,10 +68,11 @@ public class Photo implements Comparable<Photo>, Serializable {
     }
 
     public LatLng getGpsPoint() {
-        return gpsPoint;
+        return new LatLng( this.gpsLat, this.gpsLng );
     }
 
     public void setGpsPoint(LatLng gpsPoint) {
-        this.gpsPoint = gpsPoint;
+        this.gpsLng = gpsPoint.longitude;
+        this.gpsLat = gpsPoint.latitude;
     }
 }
