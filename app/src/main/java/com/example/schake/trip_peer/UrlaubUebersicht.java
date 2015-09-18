@@ -20,6 +20,11 @@ public class UrlaubUebersicht extends AppCompatActivity {
         startActivity(newMenuIntent);
     }
 
+    public void showArchiv( View view ) {
+        Intent newMenuIntent = new Intent(this, UrlaubArchiviert.class );
+        startActivity(newMenuIntent);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
