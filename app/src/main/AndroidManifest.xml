@@ -27,6 +27,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:screenOrientation="portrait"
+        android:configChanges="orientation|keyboardHidden"
         >
 
         <uses-library android:name="com.google.android.maps" />
@@ -38,6 +40,7 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyAh9oWP_lolfPZ4vpd5Xd1-GDyXpwmx3TE"/>
+
 
         <activity
             android:name=".Hauptmenu"
@@ -59,9 +62,6 @@
         <activity
             android:name=".FotoNeu"
             android:label="@string/title_activity_foto_neu" >
-        </activity>
-        <activity
-            android:name=".MapFragmentOld">
         </activity>
         <activity
             android:name=".UrlaubArchiviert"
