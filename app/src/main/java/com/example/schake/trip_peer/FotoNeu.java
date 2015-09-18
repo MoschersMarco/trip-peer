@@ -3,9 +3,12 @@ package com.example.schake.trip_peer;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.hardware.Camera;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,10 +18,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.example.schake.trip_peer.Camera.CameraPreview;
 import com.example.schake.trip_peer.Data.Photo;
 import com.example.schake.trip_peer.Data.TripManager;
+import com.example.schake.trip_peer.utils.PictureLocationListener;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -39,6 +43,20 @@ public class FotoNeu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foto_neu);
         kamera = (ImageView) findViewById(R.id.kamera);
+
+        LocationManager mlocManager = (LocationManager)getSystemService(TripPeerApplication.getAppContext()
+                .LOCATION_SERVICE);
+
+        LocationListener mlocListener = new PictureLocationListener();
+        mlocManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
+
+        String provider = Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+        if(provider.equals("")){
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
+        }
+
     }
 
     public void takeNewPicture( View view ) {
