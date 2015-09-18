@@ -32,6 +32,12 @@ public class Hauptmenu extends AppCompatActivity {
         checkButtons();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        checkButtons();
+    }
+
 
 
     private void checkButtons() {
