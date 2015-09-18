@@ -30,7 +30,7 @@
         android:layout_alignBottom="@+id/textView3"
         android:layout_alignLeft="@+id/archivierte_urlaube"
         android:layout_alignStart="@+id/archivierte_urlaube" />
-
+<!-- Durch das Drücken dieses Buttons kann ein weiteres Urlaubsfoto gemacht werden. -->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         android:onClick="newPicture" />
-
+    <!-- Durch Drücken des folgendes Knopfes kann der aktuelle Urlaub betrachtet werden. -->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

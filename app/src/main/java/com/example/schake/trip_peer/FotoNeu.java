@@ -59,7 +59,7 @@ public class FotoNeu extends AppCompatActivity {
         LocationManager mlocManager = (LocationManager)getSystemService(TripPeerApplication.getAppContext()
                 .LOCATION_SERVICE);
 
-        // getting GPS status
+        // Hier werden die GPS Daten ermittelt.
         boolean isGPSEnabled = mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
         // getting network status
@@ -73,13 +73,14 @@ public class FotoNeu extends AppCompatActivity {
         //try to get a last known location
         if (mlocManager != null && (isGPSEnabled||isNetworkEnabled) ) {
             Location location = null;
-
+        // Zuerst werden GPS Daten abgefragt.
             if( isGPSEnabled ) {
                 location = mlocManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                 if (location != null) {
                     locListener.setLastLocation(new LatLng(location.getLatitude(), location.getLongitude()));
                 }
             }
+            // Falls keine GPS Daten vorhanden, werden mögliche Standorte über den Netzwerkprovider bezogen.
             if( isNetworkEnabled &&location == null) {
                 //try to get network attached address
                 location = mlocManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -90,7 +91,7 @@ public class FotoNeu extends AppCompatActivity {
 
         }
 
-
+    // Weiterleitung zu den GPS Einstellungen, falls GPS nicht eingeschaltet ist.
         if( !isGPSEnabled ){
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(intent);
@@ -99,7 +100,7 @@ public class FotoNeu extends AppCompatActivity {
     }
 
     public void takeNewPicture( View view ) {
-        // create Intent to take a picture and return control to the calling application
+        // Durch das Drücken dieses Knopfes, gelangt man zu der Kamera und ein Foto kann gemacht werden.
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
@@ -159,13 +160,13 @@ public class FotoNeu extends AppCompatActivity {
 
         return mediaFile;
     }
-
+// Hier wird das Bild gespeichert und man gelangt zurück in das Hauptmenü.
     public void continueTrip( View view ){
         if( saveImage () ) {
             showMainMenu();
         }
     }
-
+// Hier wird das letzte Foto des Urlaubens gespeichert, der Urlaub wird beendet und archiviert.
     public void archivTrip( View view ) {
         if( saveImage() ) {
 
@@ -187,7 +188,8 @@ public class FotoNeu extends AppCompatActivity {
 
         File picture = new File(fileUri.getPath());
         LatLng position = this.locListener.getLastLocation();
-
+    /* Falls letzte bekannte Location unbekannt ist, wird eine Information angezeigt, die besagt,
+        dass keine Daten Über den Standort verfügbar sind.*/
         if(position == null ) {
             Toast.makeText( TripPeerApplication.getAppContext(),
                     "GPS Location is unkown - please wait",
@@ -197,7 +199,7 @@ public class FotoNeu extends AppCompatActivity {
 
 
             TripManager manager = TripManager.getInstance();
-
+// Hier wird das Foto erstellt und gespeichert.
             Photo newPicture = new Photo();
             newPicture.setComment(comment);
             newPicture.setFilePath(picture.getAbsolutePath());

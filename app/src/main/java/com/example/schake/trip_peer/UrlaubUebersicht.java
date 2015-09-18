@@ -79,6 +79,7 @@ public class UrlaubUebersicht extends FragmentActivity
 
 
     @Override
+    // Durch anklicken des Markers wird das jeweilige Foto aufrufen.
     public boolean onMarkerClick(final Marker marker) {
 
         int counter = this.markerList.get( marker );

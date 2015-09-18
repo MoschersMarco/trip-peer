@@ -19,7 +19,7 @@ public class UrlaubArchiviert extends AppCompatActivity {
         setContentView(R.layout.activity_urlaub_archiviert);
 
         TripManager manager = TripManager.getInstance();
-
+// Liste der einzelnen Urlaube.
         ListView listView = (ListView) findViewById( R.id.archivierteUrlaubeListView );
 
         TripListViewAdapter adapter = new TripListViewAdapter( manager.getTrips() );

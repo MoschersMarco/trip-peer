@@ -37,6 +37,7 @@ public class TripListViewAdapter extends BaseAdapter {
     }
 
     @Override
+    // Für jeden archivierten Urlaub wird eine Zeile der Listendarstellung generiert.
     public View getView(int position, View convertView, ViewGroup parent) {
         final View result;
 

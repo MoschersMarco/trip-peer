@@ -30,6 +30,8 @@ public class UrlaubAktuell extends  FragmentActivity
     private Long currentTripId = (long)0;
 
     @Override
+    /* Wenn die Karte geladen wurde sucht die App aus dem TripManager den aktuellen Urlaub und die
+    dazu gehörenden Fotos mit GPS Koordinaten */
     public void onMapReady(GoogleMap map) {
         markerList.clear();
         TripManager manager = TripManager.getInstance();
@@ -37,7 +39,7 @@ public class UrlaubAktuell extends  FragmentActivity
         List<Photo> pictures = manager.getCurrentTrip().getPhotos();
 
 
-        // Instantiates a new Polyline object and adds points to define a rectangle
+        // Hier werden die einzelnen Punkte erstellt und verbunden.
         PolylineOptions rectOptions = new PolylineOptions();
         Integer counter = 0;
         for( Photo pic : pictures ) {
@@ -47,14 +49,14 @@ public class UrlaubAktuell extends  FragmentActivity
                 continue;
             }
 
-            //add marker
+            //Neuer Marker wird gesetzt.
             Marker markerAdded = map.addMarker(new MarkerOptions()
                     .position( pic.getGpsPoint())
                     .title(pic.getComment()));
 
             this.markerList.put(markerAdded, counter);
 
-            //add new point for line
+            //Die neuen Punkte werden der Linie hinzugefügt.
             rectOptions.add(pic.getGpsPoint());
 
             counter++;
