@@ -30,7 +30,8 @@
         android:id="@+id/zum_hauptmenue_archivierte_Urlaube"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp" />
+        android:layout_marginBottom="20dp"
+        android:onClick="showMenufromArchiv" />
 
     <ListView
         android:layout_width="wrap_content"

@@ -25,7 +25,7 @@ public class Hauptmenu extends AppCompatActivity {
     }
 
     public void currentTrip( View view ) {
-        Intent newPictureIntent = new Intent(this, MapFragment.class );
+        Intent newPictureIntent = new Intent(this, UrlaubAktuell.class );
         startActivity( newPictureIntent );
     }
 

@@ -1,5 +1,6 @@
 package com.example.schake.trip_peer;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -23,6 +24,11 @@ public class UrlaubArchiviert extends AppCompatActivity {
 
         TripListViewAdapter adapter = new TripListViewAdapter( manager.getTrips() );
         listView.setAdapter( adapter );
+    }
+
+    public void showMenufromArchiv( View view ) {
+        Intent newMenuIntent = new Intent(this, Hauptmenu.class );
+        startActivity(newMenuIntent);
     }
 
     @Override

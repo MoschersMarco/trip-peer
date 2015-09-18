@@ -1,9 +1,11 @@
 package com.example.schake.trip_peer;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.CameraUpdate;
@@ -19,6 +21,10 @@ public class UrlaubAktuell extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_urlaub_aktuell);
+    }
+    public void showMenu( View view ) {
+        Intent newMenuIntent = new Intent(this, Hauptmenu.class );
+        startActivity(newMenuIntent);
     }
 
     @Override
