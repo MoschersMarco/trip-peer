@@ -22,6 +22,8 @@ public class TripManager {
     private static AtomicReference<Long> currentTime =
             new AtomicReference<>(System.currentTimeMillis());
 
+    private int counter = 0;
+
 
     /**
      * Hashmap with a key, value stores
@@ -66,7 +68,23 @@ public class TripManager {
 
     public void appendPhotoToActiveTrip( Photo photo) {
         if( this.currentTrip != null ) {
+
+            if( this.counter == 0) {
+                photo.setGpsLat((long) 13.404954);
+                photo.setGpsLong((long)52.520007);
+            }else if( this.counter == 0) {
+                photo.setGpsLat((long)53.551085);
+                photo.setGpsLong((long) 9.993682);
+            }else if( this.counter == 0) {
+                photo.setGpsLat((long)52.375892);
+                photo.setGpsLong((long)9.73201);
+            }else if( this.counter == 0) {
+                photo.setGpsLat((long)52.160597);
+                photo.setGpsLong((long)8.856095);
+            }
+
             this.currentTrip.addPhoto( photo);
+            counter++;
         }
     }
 
@@ -82,8 +100,13 @@ public class TripManager {
         }
     }
 
+    public Trip getCurrentTrip() {
+        return this.currentTrip;
+    }
 
     private void loadFromStorage() {
+
+        this.counter = 0;
 
         try {
 

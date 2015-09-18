@@ -20,11 +20,9 @@
         android:layout_marginTop="20dp"
         android:textSize="24dp" />
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <fragment
+        android:name="com.google.android.gms.maps.MapFragment"
         android:id="@+id/map"
-        tools:context="com.example.schake.trip_peer.MapFragment"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_above="@+id/button"
         android:layout_below="@+id/aktueller_urlaub_text"
         android:layout_width="200px"
