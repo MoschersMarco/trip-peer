@@ -23,7 +23,7 @@
     <fragment
         android:name="com.google.android.gms.maps.MapFragment"
         android:id="@+id/map"
-        android:layout_above="@+id/button"
+        android:layout_above="@+id/urlaubArchivierenButton"
         android:layout_below="@+id/aktueller_urlaub_text"
         android:layout_width="200px"
         android:layout_height="200px"
@@ -36,12 +36,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Urlaub archivieren"
-        android:id="@+id/button"
+        android:id="@+id/urlaubArchivierenButton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/zum_menue"
-        android:layout_alignEnd="@+id/zum_menue" />
+        android:layout_alignEnd="@+id/zum_menue"
+        android:onClick="saveCurrentTrip" />
 
     <Button
         android:layout_width="wrap_content"

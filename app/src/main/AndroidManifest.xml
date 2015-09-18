@@ -61,9 +61,6 @@
             android:label="@string/title_activity_foto_neu" >
         </activity>
         <activity
-            android:name=".MapFragmentOld">
-        </activity>
-        <activity
             android:name=".UrlaubArchiviert"
             android:label="@string/title_activity_urlaub_archiviert" >
         </activity>

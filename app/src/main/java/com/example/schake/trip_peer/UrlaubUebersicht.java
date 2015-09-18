@@ -43,18 +43,17 @@ public class UrlaubUebersicht extends FragmentActivity
         PolylineOptions rectOptions = new PolylineOptions();
         Integer counter = 0;
         for( Photo pic : pictures ) {
-            LatLng point = new LatLng(pic.getGpsLat(), pic.getGpsLong());
 
             //add marker
             Marker markerAdded = map.addMarker(new MarkerOptions()
-                    .position(point)
+                    .position( pic.getGpsPoint())
                     .title(counter.toString())
                     .title(pic.getComment()));
 
             this.markerList.put( markerAdded, counter );
 
             //add new point for line
-            rectOptions.add(point);
+            rectOptions.add(pic.getGpsPoint());
 
             counter++;
         }
@@ -99,25 +98,4 @@ public class UrlaubUebersicht extends FragmentActivity
         startActivity(newMenuIntent);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_urlaub_uebersicht, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

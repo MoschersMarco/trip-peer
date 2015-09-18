@@ -9,10 +9,16 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.schake.trip_peer.TripPeerApplication;
+import com.google.android.gms.maps.model.LatLng;
 
 public class PictureLocationListener implements LocationListener {
 
 
+    public LatLng getLastLocation() {
+        return lastLocation;
+    }
+
+    private LatLng lastLocation = null;
 
 
 
@@ -21,14 +27,7 @@ public class PictureLocationListener implements LocationListener {
 
         loc.getLatitude();
         loc.getLongitude();
-        String Text = "My current location is: "+
-        "Latitud = " + loc.getLatitude() +
-        "Longitud = " + loc.getLongitude();
-
-
-        Toast.makeText(TripPeerApplication.getAppContext(),
-                Text,
-                Toast.LENGTH_SHORT).show();
+        this.lastLocation = new LatLng( loc.getLatitude(), loc.getLongitude() );
     }
 
 
