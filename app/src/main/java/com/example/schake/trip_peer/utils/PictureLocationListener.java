@@ -14,6 +14,8 @@ public class PictureLocationListener implements LocationListener {
 
 
 
+
+
     @Override
     public void onLocationChanged(Location loc){
 

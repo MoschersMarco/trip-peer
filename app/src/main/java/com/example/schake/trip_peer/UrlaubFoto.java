@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,31 +23,58 @@ import java.util.List;
 public class UrlaubFoto extends AppCompatActivity {
 
     private List<Photo> tripPhotos = new ArrayList<Photo>();
-
+    private Long tripId = (long)0;
     private int currentIndex = 0;
+
+    private Button next;
+    private Button prev;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_urlaub_foto);
 
+        next = (Button)findViewById(R.id.naechstes_foto);
+        prev = (Button)findViewById(R.id.vorherirges_foto);
+
         Intent callerIntent = getIntent();
         TripManager manager = TripManager.getInstance();
 
-        Long tripId = callerIntent.getLongExtra("tripId", 0);
+        tripId = callerIntent.getLongExtra("tripId", 0);
 
         Trip viewedTrip = manager.getTripById( tripId );
         tripPhotos.clear();
-        currentIndex = 0;
+        this.currentIndex = callerIntent.getIntExtra("index", 0);
 
         tripPhotos.addAll( viewedTrip.getPhotos() );
 
-        showPhoto( this.tripPhotos.get(this.currentIndex));
+        if( currentIndex > this.tripPhotos.size()-1  || currentIndex < 0) {
+            currentIndex =0;
+        }
 
+        checkButtons();
+
+        showPhoto( this.tripPhotos.get(this.currentIndex) );
+
+    }
+
+    private void checkButtons () {
+        if( currentIndex + 1 == this.tripPhotos.size() ) {
+            next.setEnabled( false );
+        }else{
+            next.setEnabled( true );
+        }
+
+        if( currentIndex == 0) {
+            prev.setEnabled( false );
+        }else{
+            prev.setEnabled( true );
+        }
     }
 
     public void showUebersicht( View view ) {
         Intent newMenuIntent = new Intent(this, UrlaubUebersicht.class );
+        newMenuIntent.putExtra("tripId", tripId);
         startActivity(newMenuIntent);
     }
 
@@ -54,7 +82,7 @@ public class UrlaubFoto extends AppCompatActivity {
 
         File file = new File( currentPhoto.getFilePath() );
 
-        TextView commentTextField = (TextView) findViewById( R.id.kommentar_foto_xy );
+        TextView commentTextField = (TextView) findViewById( R.id.kommentar_foto_xy);
         commentTextField.setText(currentPhoto.getComment());
 
         ImageView picture = (ImageView) findViewById(R.id.pictures);
@@ -63,29 +91,16 @@ public class UrlaubFoto extends AppCompatActivity {
     }
 
     public void showNextPictureButtonClick( View view ) {
-        showNextPicture();
+        this.currentIndex++;
+        checkButtons();
+        showPhoto( this.tripPhotos.get( this.currentIndex ) );
     }
 
     public void showPreviousPictureButtonClick( View view ) {
         this.currentIndex--;
-
-        if( this.currentIndex == 0 ) {
-            findViewById(R.id.vorherirges_foto).setActivated( false );
-        }
-
+        checkButtons();
         showPhoto( this.tripPhotos.get( this.currentIndex ) );
     }
-
-    public void showNextPicture() {
-        this.currentIndex++;
-
-        if( this.currentIndex+1 == this.tripPhotos.size() ) {
-            findViewById(R.id.naechstes_foto).setActivated( false );
-        }
-
-        showPhoto( this.tripPhotos.get( this.currentIndex ) );
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

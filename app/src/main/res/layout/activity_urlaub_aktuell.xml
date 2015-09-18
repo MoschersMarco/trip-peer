@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Urlaub speichern"
-        android:id="@+id/button"
+        android:id="@+id/urlaubSpeichern"
         android:layout_above="@+id/zum_menue"
         android:layout_alignLeft="@+id/aktueller_urlaub_text"
         android:layout_alignStart="@+id/aktueller_urlaub_text"
