@@ -29,7 +29,8 @@
         android:id="@+id/zu_den_archivierten_urlaube"
         android:layout_marginBottom="86dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="showArchiv" />
 
     <Button
         android:layout_width="wrap_content"
@@ -38,7 +39,8 @@
         android:id="@+id/zum_hauptmenue_uebersicht"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp" />
+        android:layout_marginBottom="20dp"
+        android:onClick="showMenufromUebersicht" />
         />
 
 

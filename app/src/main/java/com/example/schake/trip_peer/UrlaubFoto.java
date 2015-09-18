@@ -45,6 +45,11 @@ public class UrlaubFoto extends AppCompatActivity {
 
     }
 
+    public void showUebersicht( View view ) {
+        Intent newMenuIntent = new Intent(this, UrlaubUebersicht.class );
+        startActivity(newMenuIntent);
+    }
+
     private void showPhoto( Photo currentPhoto ) {
 
         File file = new File( currentPhoto.getFilePath() );
